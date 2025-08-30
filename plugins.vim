@@ -5,10 +5,11 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'mhinz/vim-signify'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'vim-scripts/taglist.vim'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'embear/vim-localvimrc'
 Plug 'dhananjaylatkar/cscope_maps.nvim'
 Plug 'ibhagwan/fzf-lua'
+Plug 'mrcjkb/rustaceanvim', { 'tag': 'v5.26.0' }
 call plug#end()
 
 " NERDTree
@@ -57,5 +58,29 @@ local defaults = {
         skip_picker_for_single_result = true,
     }}
 require("cscope_maps").setup(defaults)
+
+-- rustaceanvim
+vim.g.rustaceanvim = {
+    -- Plugin cfg
+    tools = {
+    },
+    -- LSP cfg
+    server = {
+        on_attach = function(client, bufnr)
+            -- put keymaps in here
+        end,
+        default_settings = {
+            -- rust-analyzer lsp cfg
+            ['rust-analyzer'] = {
+                cargo = {
+                    allFeatures = true,
+                },
+            },
+        },
+    },
+    -- DAP cfg
+    dap = {
+    },
+}
 EOF
 
