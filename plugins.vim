@@ -9,7 +9,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'embear/vim-localvimrc'
 Plug 'dhananjaylatkar/cscope_maps.nvim'
 Plug 'ibhagwan/fzf-lua'
-Plug 'mrcjkb/rustaceanvim', { 'tag': 'v5.26.0' }
+Plug 'mrcjkb/rustaceanvim'
 call plug#end()
 
 " NERDTree
