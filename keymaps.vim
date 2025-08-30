@@ -21,5 +21,3 @@ nmap <silent><leader>gdb :bel sp \| resize 15 \| term<cr><S-A>gdb<cr><cr>
 nmap <silent><leader>1 <ESC>a/* IAMROOT, <C-R>=strftime("%Y.%m.%d")<CR>:*/<LEFT><ESC>
 nmap <silent><leader>2 <ESC>o/* IAMROOT, <C-R>=strftime("%Y.%m.%d")<CR>:<CR><BS>/<ESC><UP><END>
 
-" wewake
-nmap <silent><leader>3 <ESC>a/* WEWAKE, <C-R>=strftime("%Y.%m.%d")<CR>:*/<LEFT><ESC>
