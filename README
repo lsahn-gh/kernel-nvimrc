@@ -1,3 +1,18 @@
-my nvim config repo
+Lightweight Neovim configs for Rust & Kernel Development
+--------------------------------------------------------
 
-git clone git@github.com:memnoth/nvim-config.git ~/.config/nvim
+- Neovim v0.10 (for supporting Lua APIs)
+- Vim Plugin Manager (https://github.com/junegunn/vim-plug)
+
+- Kernel Development
+    - fzf (for fzf-lua)
+    - cscope (for C language symbols)
+
+- Rust
+    - rust-analyzer (for Rust language LSP)
+
+Install
+-------
+- git clone git@github.com:lsahn-gh/kernel-nvimrc.git ~/.config/nvim
+- git clone https://github.com/lsahn-gh/kernel-nvimrc.git ~/.config/nvim
+
