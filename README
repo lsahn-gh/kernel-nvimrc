@@ -1,7 +1,7 @@
 Lightweight Neovim configs for Rust & Kernel Development
 --------------------------------------------------------
 
-- Neovim v0.10 (for supporting Lua APIs)
+- Neovim v0.11
 - Vim Plugin Manager (https://github.com/junegunn/vim-plug)
 
 - Kernel Development
