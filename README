@@ -2,7 +2,7 @@ Lightweight Neovim configs for Rust & Kernel Development
 --------------------------------------------------------
 
 - Neovim v0.11
-- Vim Plugin Manager (https://github.com/junegunn/vim-plug)
+- Lazy Vim
 
 - Kernel Development
     - fzf (for fzf-lua)
