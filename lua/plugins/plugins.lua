@@ -64,7 +64,6 @@ require("lazy").setup({
 
     -- cscope_map (with fzf-lua picker)
     { "dhananjaylatkar/cscope_maps.nvim",
-        ft = { "c", "cpp" },
         dependencies = { "ibhagwan/fzf-lua" },
         config = function()
             require("cscope_maps").setup({
