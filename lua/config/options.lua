@@ -39,7 +39,7 @@ o.background    = "dark"
 o.encoding      = "utf8"
 o.ffs           = "unix,dos,mac"
 
-o.backup        =  false         -- file, backup, and undo
+o.backup        = false         -- file, backup, and undo
 o.wb            = false
 o.swapfile      = false
 
