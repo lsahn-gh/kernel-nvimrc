@@ -36,6 +36,6 @@ map("n", "<leader>1",   function()
                         end, { silent = true, desc = "Insert IAMROOT inline stamp" })
 map("n", "<leader>2",   function()
                             local s = "o/* IAMROOT, " .. os.date("%Y.%m.%d") .. ":"
-                            vim.api.nvim_feedkeys(tc(s .. "<CR>*/<Esc><Up><End>"), "n", false)
+                            vim.api.nvim_feedkeys(tc(s .. "<CR>/<Esc><Up><End>"), "n", false)
                         end, { silent = true, desc = "Insert IAMROOT block" })
 
