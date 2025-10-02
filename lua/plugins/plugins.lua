@@ -8,6 +8,12 @@ require("lazy").setup({
         end
     },
 
+    -- Bufexplorer
+    { "jlanzarotta/bufexplorer",
+        config = function()
+        end
+    },
+
     -- Git-Messenger
     { "rhysd/git-messenger.vim",
         keys = {
@@ -80,7 +86,12 @@ require("lazy").setup({
     -- fzf-lua
     { "ibhagwan/fzf-lua",
         cmd = "FzfLua",
-        config = function() require("fzf-lua").setup({}) end,
+        keys = {
+            { "<leader>fzf", ":FzfLua<CR>", mode = "n", silent = true, desc = "Open FzfLua dialog" }
+        },
+        config = function()
+            require("fzf-lua").setup({})
+        end,
     },
 
     -- Rust LSP
