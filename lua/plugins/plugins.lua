@@ -87,7 +87,9 @@ require("lazy").setup({
     { "ibhagwan/fzf-lua",
         cmd = "FzfLua",
         keys = {
-            { "<leader>fzf", ":FzfLua<CR>", mode = "n", silent = true, desc = "Open FzfLua dialog" }
+            { "<leader>fzf", ":FzfLua<CR>", mode = "n", silent = true, desc = "Open FzfLua dialog" },
+            { "<leader>fdg", ":FzfLua grep_cword<CR>", mode = "n", silent = true, desc = "Grep current word" },
+            { "<leader>fdf", ":FzfLua files<CR>", mode = "n", silent = true, desc = "Open files dialog" }
         },
         config = function()
             require("fzf-lua").setup({})
