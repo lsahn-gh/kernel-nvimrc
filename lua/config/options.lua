@@ -1,4 +1,5 @@
 local o = vim.opt
+local g = vim.g
 
 -- basic
 o.termguicolors     = true
@@ -57,6 +58,9 @@ o.listchars = {
     extends = "…",
     precedes = "…",
 }
+
+-- rust
+g.lazyvim_rust_diagnostics = "rust-analyzer"
 
 do
     local local_rc = ".vimrc_local"

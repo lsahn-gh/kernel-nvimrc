@@ -2,7 +2,8 @@
 require("lazy").setup({
     -- Monokai
     { "ku1ik/vim-monokai",
-        lazy = false, priority = 1000,
+        lazy = false,
+        priority = 1000,
         config = function()
             vim.cmd.colorscheme("monokai")
         end
@@ -10,8 +11,7 @@ require("lazy").setup({
 
     -- Bufexplorer
     { "jlanzarotta/bufexplorer",
-        config = function()
-        end
+        config = function() end
     },
 
     -- Git-Messenger
@@ -65,9 +65,6 @@ require("lazy").setup({
         end
     },
 
-    -- LSP
-    { "neovim/nvim-lspconfig", event = "BufReadPre" },
-
     -- cscope_map (with fzf-lua picker)
     { "dhananjaylatkar/cscope_maps.nvim",
         dependencies = { "ibhagwan/fzf-lua" },
@@ -96,34 +93,22 @@ require("lazy").setup({
         end,
     },
 
-    -- Rust LSP
-    { "mrcjkb/rustaceanvim",
-        ft = "rust",
-        init = function()
-            vim.g.rustaceanvim = {
-                tools = {},
-                server = {
-                    on_attach = function(_, _) end,
-                    default_settings = {
-                        ["rust-analyzer"] = {
-                            cargo = { allFeatures = true }
-                        }
-                    },
-                },
-                dap = {},
-            }
+    -- Easy Align
+    { "junegunn/vim-easy-align",
+        config = function()
         end,
     },
 
-    -- CPP LSP
+    -- LSP
     { "nvim-treesitter/nvim-treesitter",
         opts = {
-            ensure_installed = { "cpp" }
+            ensure_installed = { "rust", "cpp" }
         },
     },
     { "p00f/clangd_extensions.nvim",
+        config = function()
+        end,
         lazy = true,
-        config = function() end,
         opts = {
             inlay_hints = {
                 inline = false,
@@ -131,44 +116,76 @@ require("lazy").setup({
         },
     },
     { "neovim/nvim-lspconfig",
-        config = function() end,
+        config = function()
+        end,
         opts = {
             servers = {
-                -- Ensure mason installs the server
-                clangd = {
-                    keys = {
-                        { "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-                    },
-                    root_dir = function(fname)
-                        return require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt")(fname)
-                    end,
-                    capabilities = {
-                        offsetEncoding = { "utf-16" },
-                    },
-                    cmd = {
-                        "clangd",
-                        "--background-index",
-                        "--clang-tidy",
-                        "--header-insertion=iwyu",
-                        "--completion-style=detailed",
-                        "--function-arg-placeholders",
-                        "--fallback-style=llvm",
-                    },
-                    init_options = {
-                        usePlaceholders = true,
-                        completeUnimported = true,
-                        clangdFileStatus = true,
+                bacon_ls = {
+                    enabled = diagnostics == "bacon-ls",
+                },
+                rust_analyzer = { enabled = false },
+            },
+        }
+    },
+    { "mrcjkb/rustaceanvim",
+        ft = { "rust" },
+        opts = {
+            server = {
+                on_attach = function(_, bufnr)
+                    vim.keymap.set("n", "<leader>cR", function()
+                        vim.cmd.RustLsp("codeAction")
+                    end, { desc = "Code Action", buffer = bufnr })
+                    vim.keymap.set("n", "<leader>dr", function()
+                        vim.cmd.RustLsp("debuggables")
+                    end, { desc = "Rust Debuggables", buffer = bufnr })
+                end,
+                default_settings = {
+                    -- rust-analyzer language server configuration
+                    ["rust-analyzer"] = {
+                        cargo = {
+                            allFeatures = true,
+                            loadOutDirsFromCheck = true,
+                            buildScripts = {
+                                enable = true,
+                            },
+                        },
+                        -- Add clippy lints for Rust if using rust-analyzer
+                        checkOnSave = diagnostics == "rust-analyzer",
+                        -- Enable diagnostics if using rust-analyzer
+                        diagnostics = {
+                            enable = diagnostics == "rust-analyzer",
+                        },
+                        procMacro = {
+                            enable = true,
+                        },
+                        files = {
+                            exclude = {
+                                ".direnv",
+                                ".git",
+                                ".jj",
+                                ".github",
+                                ".gitlab",
+                                "bin",
+                                "node_modules",
+                                "target",
+                                "venv",
+                                ".venv",
+                            },
+                            watcher = "client",
+                        },
                     },
                 },
             },
-            setup = {
-                clangd = function(_, opts)
-                    local clangd_ext_opts = LazyVim.opts("clangd_extensions.nvim")
-                    require("clangd_extensions").setup(vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts }))
-                    return false
-                end,
-            },
         },
+        config = function(_, opts)
+            vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
+            if vim.fn.executable("rust-analyzer") == 0 then
+                LazyVim.error(
+                    "**rust-analyzer** not found in PATH, please install it.\nhttps://rust-analyzer.github.io/",
+                    { title = "rustaceanvim" }
+                )
+            end
+        end,
     },
     { "hrsh7th/nvim-cmp",
         optional = true,
