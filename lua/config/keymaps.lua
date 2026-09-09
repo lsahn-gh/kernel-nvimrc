@@ -29,6 +29,12 @@ map("n", "<leader>gdb", function()
 map("t", "<Esc><Esc>",  [[<C-\><C-n>:q<CR>]], { silent = true, desc = "Exit terminal & close" })
 map("t", "<Esc>",       [[<C-\><C-n>]],       { silent = true, desc = "Exit terminal-mode" })
 
+-- default hover man!
+map("n", "<leader>k",   function()
+                            local word = vim.fn.expand("<cword>")
+                            pcall(vim.cmd, "Man " .. word)
+                        end, { silent = true, desc = "" })
+
 -- IAMROOT stamps
 map("n", "<leader>1",   function()
                             local s = "a/* IAMROOT, " .. os.date("%Y.%m.%d") .. ":*/"
